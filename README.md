@@ -36,7 +36,7 @@ Configure the add-on via the Hass.io front-end. The configuration closely mirror
 2. An additional top-level `data-path` option is required. Set this to the path where like the add-on to persist data. Defaults to `/share/zigbee2mqtt`. Note that both `config` and `share` directories are mapped into the container (read-write) and are available to you.
 3. If you are using groups or device-specific settings, you must use seperate files, and provide the paths to these files in their corresponding config options as described by the zigbee2mqtt docs. This is due to a limitation Hass.io places on nested config levels.
 
-See the [zigbee2mqtt configuration docs](http://www.zigbee2mqtt.io/configuration/configuration.html) for a complete description of available options. If you're not sure if a new option is supported, check to see if it is included in this repository's `zigbee2mqtt/config.json` or `zigbee2mqtt_edge/config.json` `schema`. If not, you can open an issue to add support for it.
+See the [zigbee2mqtt configuration docs](https://www.zigbee2mqtt.io/information/configuration.html) for a complete description of available options. If you're not sure if a new option is supported, check to see if it is included in this repository's `zigbee2mqtt/config.json` or `zigbee2mqtt_edge/config.json` `schema`. If not, you can open an issue to add support for it.
 
 - Depending on your configuration, the MQTT server config will need to include the port, typically `1883` or `8883` for SSL communications. For example, `mqtt://core-mosquitto:1883` for Hass.io's Mosquitto addon.
 - To find out which serial ports you have exposed go to **Hass.io > System > Host system > Show Hardware**
@@ -157,6 +157,10 @@ You can configure the socat module within the socat section using the following 
 - `restartdelay` delay (in seconds) to wait before a socat process is restarted when it has terminated (optional)
 
 **NOTE:** You'll have to change both the `master` and the `slave` options according to your needs. The defaults values will make sure that socat listens on port `8485` and redirects its output to `/dev/ttyZ2M`. The zigbee2mqtt's serial.port setting is NOT automatically set and has to be changed accordingly.
+
+----
+### Adding Support for New Devices
+If you are interested in [adding support for new devices to zigbee2mqtt](https://www.zigbee2mqtt.io/how_tos/how_to_support_new_devices.html), set the optional, top-level `zigbee_shepherd_devices` option to `true` in your configuration. When set, the add-on will scan your `data_path` for a `devices.js` file, and will run zigbee2mqtt using this custom file.
 
 ----
 ### Issues
